@@ -1,0 +1,47 @@
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+.corTitulo {
+  color: #c1926b;
+}
+#cardCentral {
+  max-width: 400px;
+  margin: auto;
+  width: 60%;
+  margin-top: 1%;
+}
+.fontSizeTitulo {
+  font-size: large;
+}
+.largura50 {
+  width: 50%;
+}
+.ajusteBotao {
+  background-color: #f3e8de;
+  color: #c1926b;
+  margin: 0 auto;
+  display: block;
+}
+
+.marginTop5 {
+  margin: top 5%;
+}
+.fontSizeRodape {
+  font-size: smaller;
+}
+.centralizarTexto {
+  text-align: center;
+}
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+  color: #c4a788 !important;
+}
+
+::ng-deep .mat-focused .mat-form-field -underline .mat-form-field-ripple {
+  background-color: #c4a788 !important;
+}

@@ -1,0 +1,83 @@
+<mat-card>
+  <mat-card-title class="corTitulo"> EduSync Bank </mat-card-title>
+</mat-card>
+<mat-card>
+  <mat-card-content id="cardCentral">
+    <form
+      [formGroup]="form"
+      class="example-form"
+      (submit)="salvarDadosCliente()"
+    >
+      <mat-card-subtitle class="corTitulo fontSizeTitulo"
+        >Criar uma conta!</mat-card-subtitle
+      >
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Como devemos te chamar</mat-label>
+        <textarea matInput formControlName="nome" name="nome" required>
+        </textarea>
+        <mat-error>{{ error }}</mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Email</mat-label>
+        <input
+          type="email"
+          matInput
+          formControlName="email"
+          name="email"
+          placeholder="Ex. pat@example.com"
+          required
+        />
+        <mat-error
+          *ngIf="
+            form.get('email')?.hasError('required') ||
+            form.get('email')?.hasError('email')
+          "
+          >{{ validaEmail() }}</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Senha:</mat-label>
+        <input
+          matInput
+          formControlName="senha"
+          name="senha"
+          type="password"
+          (keyup)="validaSenhas()"
+          required
+        />
+        <mat-error>{{ error }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Confirmar a sua Senha:</mat-label>
+        <input
+          matInput
+          type="password"
+          formControlName="confirmacaoSenha"
+          name="confirmacaoSenha"
+          (keyup)="validaSenhas()"
+          required
+        />
+        <mat-error
+          *ngIf="form.get('confirmacaoSenha')?.hasError('camposDivergentes')"
+          >{{ validaSenhas() }}</mat-error
+        >
+      </mat-form-field>
+      <button
+        mat-flat-button
+        class="largura50 ajusteBotao"
+        mat-flat-button
+        type="submit"
+        [disabled]="!form.valid"
+      >
+        Criar Conta
+      </button>
+    </form>
+  </mat-card-content>
+
+  <mat-card-content id="marginTop5 fontSizeRodape">
+    <div class="centralizarTexto">
+      Já tem conta?<a routerLink="../login">Go to page</a>
+    </div>
+  </mat-card-content>
+</mat-card>
