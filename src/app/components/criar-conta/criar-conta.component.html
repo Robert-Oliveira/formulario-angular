@@ -77,7 +77,10 @@
 
   <mat-card-content id="marginTop5 fontSizeRodape">
     <div class="centralizarTexto">
-      Já tem conta?<a routerLink="../login">Go to page</a>
+      Já tem conta?<a class="corTitulo" routerLink="../login">Go to page</a>
     </div>
   </mat-card-content>
 </mat-card>
+<div class="spinner" *ngIf="loading | async">
+  <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+</div>

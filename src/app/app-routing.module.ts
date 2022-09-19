@@ -1,5 +1,5 @@
-import { LoginComponent } from './login/login.component';
-import { CriarContaComponent } from './criar-conta/criar-conta.component';
+import { LoginComponent } from './components/login/login.component';
+import { CriarContaComponent } from './components/criar-conta/criar-conta.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
