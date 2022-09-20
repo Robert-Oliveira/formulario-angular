@@ -1,1 +1,60 @@
-<p>login works!</p>
+<div>
+  <mat-card>
+    <mat-card-title class="corTitulo"> EduSync Bank </mat-card-title>
+  </mat-card>
+  <form [formGroup]="form" (ngSubmit)="realizarLogin()">
+    <mat-card id="cardCentral">
+      <mat-card-subtitle class="corTitulo fontSizeTitulo"
+        >Digite suas credenciais</mat-card-subtitle
+      >
+      <mat-card-content>
+        <mat-card-content>
+          <mat-form-field class="largura100 marginTop5">
+            <mat-label>E-mail</mat-label>
+            <input
+              matInput
+              placeholder="exemplo@exemplo.com"
+              formControlName="email"
+              name="email"
+              required
+            />
+            <mat-error *ngIf="form.get('email')?.hasError('required')"
+              >Este campo é obrigatório!</mat-error
+            >
+          </mat-form-field>
+          <mat-form-field class="largura100">
+            <mat-label>Senha</mat-label>
+            <input
+              matInput
+              type="password"
+              formControlName="senha"
+              name="senha"
+              required=""
+            />
+            <mat-error *ngIf="form.get('senha')?.hasError('required')"
+              >Este campo é obrigatório!</mat-error
+            >
+          </mat-form-field>
+        </mat-card-content>
+        <button
+          mat-flat-button
+          type="submit"
+          class="ajusteBotao largura50"
+          [disabled]="!form.valid"
+        >
+          Entrar
+        </button>
+      </mat-card-content>
+
+      <mat-card-content class="marginTop5 fontSizeRodape centralizarTexto">
+        <div>
+          Ainda não tem conta?
+          <a class="corTitulo" routerLink="../criar-conta">crie uma aqui.</a>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </form>
+</div>
+<div class="spinner" *ngIf="loading | async">
+  <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+</div>

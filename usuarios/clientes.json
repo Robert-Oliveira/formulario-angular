@@ -1,0 +1,22 @@
+{
+  "clientes": [
+    {
+      "id": 1,
+      "nome": "Teste 1",
+      "email": "teste1@teste1",
+      "senha": "senha"
+    },
+    {
+      "id": 2,
+      "nome": "Teste 2",
+      "email": "teste2@teste2",
+      "senha": "senha"
+    },
+    {
+      "id": 3,
+      "nome": "teste3",
+      "email": "teste3@teste3",
+      "senha": "senha"
+    }
+  ]
+}
