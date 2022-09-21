@@ -1,4 +1,4 @@
-import { GeralService } from './../../services/geral.service';
+import { GeralService } from '../../services/geral/geral.service';
 import { CriarConta } from '../../models/criar-conta-model';
 import { SalvarClienteService } from '../../services/salvar-cliente.service';
 import { Component, OnInit } from '@angular/core';
@@ -31,6 +31,7 @@ export class CriarContaComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // valida se os campos do formulario estão preenchidos de forma válida
     this.form = this.formBuilder.group({
       nome: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -51,13 +52,16 @@ export class CriarContaComponent implements OnInit {
   salvarDadosCliente() {
     this.geralService.showLoading();
 
+    //pegando os dados dos inputs
     const id = this.clientes[this.clientes.length - 1].id + 1;
     const nome = this.form.controls['nome'].value;
     const email = this.form.controls['email'].value;
     const senha = this.form.controls['senha'].value;
 
+    //cria um objeto com os dados informados
     const cliente: CriarConta = { id, nome: nome, email: email, senha: senha };
 
+    //salva os dados informados dentro do array, dispara a msg de sucesso
     this.SalvarClienteService.salvarCliente(cliente).subscribe({
       next: () => {
         this.geralService.hideLoading();
@@ -71,6 +75,7 @@ export class CriarContaComponent implements OnInit {
     });
   }
 
+  //dispara os alertas
   alertaDados(tipoExecucao: String) {
     switch (tipoExecucao) {
       case 'sucesso':
@@ -92,6 +97,7 @@ export class CriarContaComponent implements OnInit {
     }
   }
 
+  // válida se o email informado tem um formato válido
   validaEmail(): String {
     if (this.form.controls['email'].hasError('required')) {
       return this.error;
@@ -100,6 +106,8 @@ export class CriarContaComponent implements OnInit {
       ? 'E-mail inválido'
       : '';
   }
+
+  // checka se a senha e a confirmação de senha são identicos
   validaSenhas(): string {
     if (
       this.form.controls['senha'].value !==
@@ -109,7 +117,6 @@ export class CriarContaComponent implements OnInit {
         camposDivergentes: true,
       });
     }
-
     return this.form.controls['confirmacaoSenha'].hasError('camposDivergentes')
       ? 'As senhas devem ser iguais'
       : '';

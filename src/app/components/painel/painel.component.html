@@ -1,0 +1,58 @@
+<mat-card style="margin-bottom: 3%">
+  <mat-card-title class="corTitulo"
+    >Bem vindo, {{ nomeCliente }}</mat-card-title
+  >
+  <mat-card-subtitle>
+    <div id="displayFlex">
+      <label [ngClass]="!exibirSaldo ? '' : 'blur'">{{
+        saldo | currency
+      }}</label>
+      <mat-icon matSuffix (click)="exibirSaldo = !exibirSaldo"
+        >{{ exibirSaldo ? "visibility_off" : "visibility" }}
+      </mat-icon>
+    </div>
+  </mat-card-subtitle>
+</mat-card>
+
+<mat-grid-list cols="4" rowHeight="2:1" gutterSize="30px">
+  <mat-grid-tile colspan="1">
+    <mat-card class="sizeCard cursor">
+      <mat-card-title class="corTitulo">Extrato</mat-card-title>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="1">
+    <mat-card class="sizeCard">
+      <mat-card-title class="corDisabled">Pagamentos</mat-card-title>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="1">
+    <mat-card class="sizeCard">
+      <mat-card-title class="corDisabled">Transferências</mat-card-title>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="1">
+    <mat-card class="sizeCard">
+      <mat-card-title class="corDisabled">Empréstimos</mat-card-title>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="1">
+    <mat-card class="sizeCard">
+      <mat-card-title class="corDisabled">Cartões</mat-card-title>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="1">
+    <mat-card class="sizeCard">
+      <mat-card-title class="corDisabled">Consórcio</mat-card-title>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="1">
+    <mat-card class="sizeCard">
+      <mat-card-title class="corDisabled">Investimentos</mat-card-title>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="1">
+    <mat-card class="sizeCard">
+      <mat-card-title class="corDisabled">PIX</mat-card-title>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>

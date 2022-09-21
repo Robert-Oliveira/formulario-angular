@@ -1,4 +1,5 @@
-import { GeralService } from './../../services/geral.service';
+import { Router } from '@angular/router';
+import { GeralService } from '../../services/geral/geral.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SalvarClienteService } from './../../services/salvar-cliente.service';
 import { CriarConta } from './../../models/criar-conta-model';
@@ -9,6 +10,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { retryWhen } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +26,8 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private salvarClienteService: SalvarClienteService,
     private snackBar: MatSnackBar,
-    private geralService: GeralService
+    private geralService: GeralService,
+    private route: Router
   ) {}
 
   ngOnInit(): void {
@@ -48,9 +51,29 @@ export class LoginComponent implements OnInit {
   }
 
   realizarLogin() {
+    let cliente = this.validarUsuario();
+
+    if (!cliente) {
+      this.alertaSnackBar('usuarioInexistente');
+    } else {
+      this.validarSenha(cliente);
+    }
+  }
+
+  validarUsuario(): any {
     for (let cliente of this.clientes) {
-      if (cliente.email === this.form.controls['email'].value)
-        console.log('iguais');
+      if (cliente.email === this.form.controls['email'].value) return cliente;
+    }
+    return null;
+  }
+
+  validarSenha(cliente: CriarConta) {
+    if (cliente.senha === this.form.controls['senha'].value) {
+      this.alertaSnackBar('loginSucesso');
+      this.route.navigate(['/painel']);
+      this.salvarClienteService.salvarClienteLogin(cliente);
+    } else {
+      this.alertaSnackBar('usuarioInexistente');
     }
   }
 
@@ -59,9 +82,21 @@ export class LoginComponent implements OnInit {
       case 'sistemaIndisponivel':
         this.snackBar.open('Sistema temporariamente indisponível', undefined, {
           panelClass: ['snackbar-tema'],
+          duration: 2000,
         });
         break;
-
+      case 'usuarioInexistente':
+        this.snackBar.open('E-mail ou senha incorreto(s)', undefined, {
+          panelClass: ['snackbar-tema'],
+          duration: 2000,
+        });
+        break;
+      case 'loginSucesso':
+        this.snackBar.open('Login realizado com sucesso.', undefined, {
+          panelClass: ['snackbar-tema'],
+          duration: 2000,
+        });
+        break;
       default:
         break;
     }
